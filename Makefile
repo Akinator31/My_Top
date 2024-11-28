@@ -23,17 +23,24 @@ TOP_PART =	src/top_part/first_line.c \
 UTILS =	src/utils/is_only_numbers.c \
 		src/utils/fetch_process_status.c \
 
+LINKED_LIST =	lib/my_list/add_data.c \
+				lib/my_list/info_list.c \
+				lib/my_list/remove_data.c \
+
 LIB = lib/my_lib/libmy.a
 
-OBJ = $(SRC:.c=.o) $(FETCH_DATA:.c=.o) $(TOP_PART:.c=.o) $(UTILS:.c=.o)
+OBJ = 	$(SRC:.c=.o) $(FETCH_DATA:.c=.o) $(TOP_PART:.c=.o) \
+		$(UTILS:.c=.o) $(LINKED_LIST:.c=.o)
 
 NAME = my_top
 
 all: $(NAME)
 
+
+CFLAGS += -Iinclude -g3 -fsanitize=address
 $(NAME): $(OBJ)
 	make -C lib/my_lib
-	gcc -o $(NAME) $(OBJ) $(LIB) -lncurses
+	gcc -o $(NAME) $(OBJ) $(LIB) -lncurses -fsanitize=address -g3
 
 clean:
 	find . -type f -name "*.o" -delete

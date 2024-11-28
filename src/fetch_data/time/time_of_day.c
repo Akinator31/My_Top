@@ -24,5 +24,6 @@ char *fetch_rtc_time(void)
         write(1, "Error reading rtc file\n", 24);
         return NULL;
     }
+    time_file[19] = '\0';
     return time_file;
 }
