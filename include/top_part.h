@@ -11,5 +11,8 @@
 
 int draw_first_line(WINDOW *window);
 int draw_second_line(WINDOW *window);
+int draw_third_line(WINDOW *window);
+int draw_fourth_line(WINDOW *window);
+int draw_fifth_line(WINDOW *window);
 
 #endif

@@ -15,15 +15,22 @@ int main(int ac, char **av)
 {
     WINDOW *window = initscr();
 
-    wtimeout(window, 3000);
+    wtimeout(window, 2000);
     noecho();
     while (true) {
         draw_first_line(window);
         draw_second_line(window);
+        draw_third_line(window);
+        draw_fourth_line(window);
+        draw_fifth_line(window);
         wrefresh(window);
-        if (wgetch(window) == 113)
+        if (wgetch(window) == 113) {
+            refresh();
+            endwin();
             return 0;
+        }
         wclear(window);
     }
     endwin();
+    return 0;
 }

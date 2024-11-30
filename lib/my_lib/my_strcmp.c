@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "my.h"
+#include "../../include/my.h"
 
 char is_alpha(char act_char)
 {

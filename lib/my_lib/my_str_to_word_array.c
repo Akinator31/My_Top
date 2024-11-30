@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "my.h"
+#include "../../include/my.h"
 
 static int is_alphanumeric_char(char const str_char)
 {

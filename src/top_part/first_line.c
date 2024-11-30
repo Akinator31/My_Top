@@ -21,4 +21,5 @@ int draw_first_line(WINDOW *window)
     else
         printw(", %d user, ", fetch_active_users());
     print_load_average();
+    free(time);
 }

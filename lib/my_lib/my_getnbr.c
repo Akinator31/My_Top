@@ -5,8 +5,8 @@
 ** task05
 */
 
-#include "my.h"
 #include <stdio.h>
+#include "../../include/my.h"
 
 int check_minus_and_size_number(int result, int minus, int size_nb)
 {

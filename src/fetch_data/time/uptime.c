@@ -11,7 +11,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <ncurses.h>
-#include "../../../lib/my_lib/my.h"
+#include "my.h"
 
 void analyse_uptime(char *time_file)
 {
@@ -51,4 +51,5 @@ void fetch_uptime(void)
         return;
     }
     analyse_uptime(time_file);
+    free(time_file);
 }

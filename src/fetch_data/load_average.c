@@ -36,4 +36,5 @@ void print_load_average(void)
     for (i++; i <= 13; i++)
         printw("%c", load_avg[i]);
     printw("\n");
+    free(load_avg);
 }

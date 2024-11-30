@@ -25,5 +25,6 @@ char *fetch_rtc_time(void)
         return NULL;
     }
     time_file[19] = '\0';
+    close(fd);
     return time_file;
 }

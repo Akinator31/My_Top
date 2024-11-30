@@ -9,9 +9,9 @@
 #include <fcntl.h>
 #include <ncurses.h>
 #include <unistd.h>
-#include "../../../include/fetch_data.h"
-#include "../../../include/utils.h"
-#include "../../../lib/my_lib/my.h"
+#include "fetch_data.h"
+#include "utils.h"
+#include "my.h"
 
 int fetch_stopped_process(void)
 {

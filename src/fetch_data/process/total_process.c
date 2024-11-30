@@ -6,8 +6,8 @@
 */
 
 #include <dirent.h>
-#include "../../../include/fetch_data.h"
-#include "../../../include/utils.h"
+#include "fetch_data.h"
+#include "utils.h"
 
 int fetch_total_process(void)
 {

@@ -5,7 +5,7 @@
 ** task09
 */
 
-#include "my.h"
+#include "../../include/my.h"
 
 char *my_strlowcase(char *str)
 {
