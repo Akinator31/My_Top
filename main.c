@@ -8,23 +8,25 @@
 #include <ncurses.h>
 #include <curses.h>
 #include <unistd.h>
-#include "include/top_part.h"
-#include "include/fetch_data.h"
+#include "top_part.h"
+#include "bottom_part.h"
+#include "fetch_data.h"
 
 int main(int ac, char **av)
 {
     WINDOW *window = initscr();
+    WINDOW *process_list = newwin(0, 0, 7, 0);
 
     wtimeout(window, 2000);
+    wtimeout(process_list, 2000);
     noecho();
     while (true) {
-        draw_first_line(window);
-        draw_second_line(window);
-        draw_third_line(window);
-        draw_fourth_line(window);
-        draw_fifth_line(window);
+        draw_top_part(window);
+        print_title_bar(window);
+        box(process_list, 0, 0);
         wrefresh(window);
-        if (wgetch(window) == 113) {
+        wrefresh(process_list);
+        if (getch() == 113) {
             refresh();
             endwin();
             return 0;

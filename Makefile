@@ -36,6 +36,9 @@ TOP_PART =	src/top_part/first_line.c \
 			src/top_part/third_line.c \
 			src/top_part/fourth_line.c \
 			src/top_part/fifth_line.c \
+			src/top_part/draw_top_part.c \
+
+BOTTOM_PART =	src/bottom_part/process_listing.c \
 
 UTILS =	src/utils/is_only_numbers.c \
 		src/utils/fetch_process_status.c \
@@ -55,8 +58,12 @@ LIB = 	lib/my_lib/my_getnbr.c \
 		lib/my_lib/my_compute_power_rec.c \
 		lib/my_lib/my_strlowcase.c \
 
+LINKED_LIST = 	lib/my_list/add_data.c \
+				lib/my_list/info_list.c \
+				lib/my_list/remove_data.c \
+
 OBJ = 	$(SRC:.c=.o) $(FETCH_DATA:.c=.o) $(TOP_PART:.c=.o) \
-		$(UTILS:.c=.o) $(LIB:.c=.o)
+		$(UTILS:.c=.o) $(LIB:.c=.o) $(BOTTOM_PART:.c=.o)
 
 NAME = my_top
 

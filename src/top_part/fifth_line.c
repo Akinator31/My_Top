@@ -7,7 +7,7 @@
 
 #include <ncurses.h>
 #include <stdlib.h>
-#include "../../include/fetch_data.h"
+#include "fetch_data.h"
 
 int draw_fifth_line(WINDOW *window)
 {
@@ -19,5 +19,5 @@ int draw_fifth_line(WINDOW *window)
     printw("MiB Swap:   %.1f total,", total_swap_memory);
     printw("   %.1f free,", free_swap_memory);
     printw("      %.1f used.", used_swap_memory);
-    printw("   %.1f avail Mem", available_swap_memory);
+    printw("   %.1f avail Mem\n\n", available_swap_memory);
 }

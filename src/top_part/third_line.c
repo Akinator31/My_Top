@@ -7,7 +7,7 @@
 
 #include <ncurses.h>
 #include <dirent.h>
-#include "../../include/fetch_data.h"
+#include "fetch_data.h"
 
 int draw_third_line(WINDOW *window)
 {
