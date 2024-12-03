@@ -21,6 +21,10 @@ char *open_and_read_file(char *filepath, int buffer_size)
         return NULL;
     }
     read_result = read(fd, buffer, buffer_size);
+    if (read_result == -1) {
+        write(2, "Error reading file\n", 20);
+        return NULL;
+    }
     buffer[buffer_size - 1] = '\0';
     close(fd);
     return buffer;
