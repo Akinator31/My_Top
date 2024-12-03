@@ -11,14 +11,14 @@
 #include "top_part.h"
 #include "bottom_part.h"
 #include "fetch_data.h"
+#include "utils.h"
 
 int main(int ac, char **av)
 {
     WINDOW *window = initscr();
     WINDOW *process_list = newwin(0, 0, 7, 0);
 
-    wtimeout(window, 2000);
-    wtimeout(process_list, 2000);
+    set_timeout(2, window, process_list);
     noecho();
     while (true) {
         draw_top_part(window);

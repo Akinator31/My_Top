@@ -1,3 +1,4 @@
 .vscode
 lib/my_lib/libmy.a
 sos
+coding-style-reports.log
