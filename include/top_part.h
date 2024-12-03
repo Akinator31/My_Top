@@ -9,11 +9,10 @@
     #define INCLUDED_TOP_PART_H
     #include <ncurses.h>
 
-int draw_first_line(WINDOW *window);
-int draw_second_line(WINDOW *window);
-int draw_third_line(WINDOW *window);
-int draw_fourth_line(WINDOW *window);
-int draw_fifth_line(WINDOW *window);
+int show_cpu_stat(WINDOW *window);
+int show_mem_stat(WINDOW *window);
+int show_uptime_load_average(WINDOW *window);
+int show_tasks_status(WINDOW *window);
 void draw_top_part(WINDOW *window);
 
 #endif
