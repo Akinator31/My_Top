@@ -26,7 +26,7 @@ int main(int ac, char **av)
         box(process_list, 0, 0);
         wrefresh(window);
         wrefresh(process_list);
-        if (getch() == 113) {
+        if (wgetch(window) == 113) {
             refresh();
             endwin();
             return 0;
