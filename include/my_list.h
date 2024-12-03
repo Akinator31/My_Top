@@ -26,5 +26,6 @@ linked_list_t *pop_front_list(linked_list_t *list,
     void (*clean_func)(void *data));
 linked_list_t *push_back_list(linked_list_t *list, void *data);
 void clear_list(linked_list_t *list);
+int is_in_list(linked_list_t *list, char *element);
 
 #endif

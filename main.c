@@ -34,4 +34,5 @@ int main(int ac, char **av)
         wclear(window);
     }
     endwin();
+    return 0;
 }

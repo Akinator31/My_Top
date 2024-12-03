@@ -8,6 +8,7 @@
 #ifndef INCLUDED_FETCH_DATA_H
     #define INCLUDED_FETCH_DATA_H
     #include <sys/types.h>
+    #include <ncurses.h>
 
 typedef struct processus_s processus_t;
 
@@ -26,28 +27,40 @@ struct processus_s {
     char *command;
 };
 
+enum memory_element {
+    AVAILABLE_MEMORY,
+    BUFFER_MEMORY,
+    CACHE_MEMORY,
+    FREE_MEMORY,
+    SHMEM_MEMORY,
+    SHMEMHUGEPAGE,
+    SUNRECLAIMED_MEMORY,
+    TOTAL_MEMORY,
+    USED_MEMORY,
+    AVAILABLE_SWAP_MEMORY,
+    FREE_SWAP_MEMORY,
+    TOTAL_SWAP_MEMORY,
+    USED_SWAP_MEMORY
+};
+
+enum process_status {
+    RUNNING,
+    SLEEPING,
+    STOPPED,
+    ZOMBIE,
+    TOTAL
+};
+
 char *fetch_rtc_time(void);
 void fetch_uptime(void);
 int fetch_active_users(void);
 void print_load_average(void);
-int fetch_total_process(void);
-int fetch_running_process(void);
-int fetch_sleeping_process(void);
-int fetch_stopped_process(void);
-int fetch_zombie_process(void);
 int fetch_kernel_system_stat_user_mode(void);
-double fetch_total_memory(void);
-double fetch_free_memory(void);
-double fetch_used_memory(void);
-double fetch_buffer_memory(void);
-double fetch_cache_memory(void);
-double fetch_shmem_memory(void);
-double fetch_shmemhugepage_memory(void);
-double fetch_sunreclaimed_memory(void);
-double fetch_available_memory(void);
-double fetch_total_swap_memory(void);
-double fetch_free_swap_memory(void);
-double fetch_used_swap_memory(void);
-double fetch_available_swap_memory(void);
+int *get_global_process_status(void);
+double *get_memory_stat(char *filepath);
+int show_uptime_load_average(WINDOW *window);
+int show_tasks_status(WINDOW *window);
+int show_cpu_stat(WINDOW *window);
+int show_mem_stat(WINDOW *window);
 
 #endif

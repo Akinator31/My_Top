@@ -8,23 +8,25 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <ncurses.h>
+#include <stdlib.h>
+#include "utils.h"
 
 int fetch_process_status(char *filepath, char status)
 {
-    int fd = open(filepath, O_RDONLY);
+    char *buffer = open_and_read_file(filepath, 100);
     int i = 0;
-    char buffer[1000];
 
-    read(fd, buffer, 1000);
+    if (buffer == NULL)
+        return 0;
     for (i = 0; buffer[i] != '\0'; i++) {
         if ((buffer[i] == 'S') && (buffer[i + 1] == 't')
             && (buffer[i + 2] == 'a'))
             break;
     }
     if (buffer[i + 7] == status) {
-        close(fd);
+        free(buffer);
         return 1;
     }
-    close(fd);
+    free(buffer);
     return 0;
 }

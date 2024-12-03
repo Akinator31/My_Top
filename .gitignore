@@ -1,3 +1,4 @@
 .vscode
 lib/my_lib/libmy.a
 coding-style-reports.log
+test.log

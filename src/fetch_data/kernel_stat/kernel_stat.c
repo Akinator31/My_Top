@@ -16,7 +16,7 @@ int compute_ticks_sum(char **ticks_value)
 {
     int result = 0;
 
-    for (int i = 1; i < 10; i++)
+    for (int i = 1; i < 9; i++)
         result += my_getnbr(ticks_value[i]);
     return result;
 }

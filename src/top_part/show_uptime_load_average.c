@@ -9,17 +9,17 @@
 #include <stdlib.h>
 #include "fetch_data.h"
 
-int draw_first_line(WINDOW *window)
+int show_uptime_load_average(WINDOW *window)
 {
     char *time = fetch_rtc_time();
-    int nb_active_users = 0;
+    int nb_active_users = fetch_active_users();
 
     printw("top - %s up ", time + 11);
     fetch_uptime();
     if (nb_active_users > 1)
-        printw(", %d users, ", 0);
+        printw(", %d users, ", nb_active_users);
     else
-        printw(", %d user, ", 0);
+        printw(", %d user, ", nb_active_users);
     print_load_average();
     free(time);
 }

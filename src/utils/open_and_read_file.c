@@ -17,6 +17,7 @@ char *open_and_read_file(char *filepath, int buffer_size)
     int read_result = 0;
 
     if (fd == -1) {
+        printf("file : %s\n", filepath);
         write(2, "Error opening file\n", 20);
         return NULL;
     }

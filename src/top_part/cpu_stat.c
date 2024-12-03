@@ -9,7 +9,7 @@
 #include <dirent.h>
 #include "fetch_data.h"
 
-int draw_third_line(WINDOW *window)
+int show_cpu_stat(WINDOW *window)
 {
     printw("%%Cpu(s):  ");
     fetch_kernel_system_stat_user_mode();

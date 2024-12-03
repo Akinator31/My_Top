@@ -12,9 +12,8 @@
 
 void draw_top_part(WINDOW *window)
 {
-    draw_first_line(window);
-    draw_second_line(window);
-    draw_third_line(window);
-    draw_fourth_line(window);
-    draw_fifth_line(window);
+    show_uptime_load_average(window);
+    show_tasks_status(window);
+    show_cpu_stat(window);
+    show_mem_stat(window);
 }
