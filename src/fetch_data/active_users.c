@@ -19,12 +19,15 @@ int fetch_active_users(void)
 {
     int fd = open("/var/log/wtmp", O_RDONLY);
     linked_list_t *user_list = new_list();
+    long test;
     struct utmp info;
     int nb_users = 0;
 
+    if (fd == -1)
+        return 0;
     while (read(fd, &info, sizeof(info)) != 0) {
-        if (!is_in_list(user_list, info.ut_user) &&
-            (info.ut_type == USER_PROCESS)) {
+        if ((info.ut_type == USER_PROCESS) &&
+            !is_in_list(user_list, info.ut_user)) {
             user_list = push_front_list(user_list, info.ut_user);
             nb_users += 1;
         }

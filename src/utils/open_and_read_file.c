@@ -17,13 +17,12 @@ char *open_and_read_file(char *filepath, int buffer_size)
     int read_result = 0;
 
     if (fd == -1) {
-        printf("file : %s\n", filepath);
-        write(2, "Error opening file\n", 20);
+        free(buffer);
         return NULL;
     }
     read_result = read(fd, buffer, buffer_size);
     if (read_result == -1) {
-        write(2, "Error reading file\n", 20);
+        free(buffer);
         return NULL;
     }
     buffer[buffer_size - 1] = '\0';

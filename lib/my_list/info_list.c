@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "fetch_data.h"
 #include "my_list.h"
 #include "my.h"
 
@@ -26,12 +27,24 @@ void clear_list(linked_list_t *list)
     }
 }
 
+void clear_process_list(linked_list_t *list)
+{
+    linked_list_t *temp = list;
+
+    while (temp != NULL) {
+        free(((processus_t *)(temp->data))->user);
+        free(temp->data);
+        temp = temp->next;
+    }
+    clear_list(list);
+}
+
 int is_in_list(linked_list_t *list, char *element)
 {
     linked_list_t *temp = list;
 
     while (temp != NULL) {
-        if (strcmp(element, ((char *)(temp->data))) == 0) {
+        if (element == ((char *)(temp->data))) {
             return 1;
         }
         temp = temp->next;

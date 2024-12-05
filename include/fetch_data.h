@@ -9,12 +9,13 @@
     #define INCLUDED_FETCH_DATA_H
     #include <sys/types.h>
     #include <ncurses.h>
+    #include "my_list.h"
 
 typedef struct processus_s processus_t;
 
 struct processus_s {
     pid_t pid;
-    char user[32];
+    char *user;
     short pr;
     short ni;
     int virt;
@@ -62,5 +63,6 @@ int show_uptime_load_average(WINDOW *window);
 int show_tasks_status(WINDOW *window);
 int show_cpu_stat(WINDOW *window);
 int show_mem_stat(WINDOW *window);
+linked_list_t *fetch_global_process_info(void);
 
 #endif

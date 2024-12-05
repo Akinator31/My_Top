@@ -9,6 +9,6 @@
     #define INCLUDED_BOTTOM_PART_H
     #include <ncurses.h>
 
-void print_title_bar(WINDOW *window);
+void print_title_bar(WINDOW *window, WINDOW *process_list);
 
 #endif

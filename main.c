@@ -22,8 +22,7 @@ int main(int ac, char **av)
     noecho();
     while (true) {
         draw_top_part(window);
-        print_title_bar(window);
-        box(process_list, 0, 0);
+        print_title_bar(window, process_list);
         wrefresh(window);
         wrefresh(process_list);
         if (wgetch(window) == 113) {
@@ -32,6 +31,7 @@ int main(int ac, char **av)
             return 0;
         }
         wclear(window);
+        wclear(process_list);
     }
     endwin();
     return 0;

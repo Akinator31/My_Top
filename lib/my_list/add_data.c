@@ -20,6 +20,15 @@ linked_list_t *push_front_list(linked_list_t *list, void *data)
     return new_element;
 }
 
+linked_list_t *push_front_list_long(linked_list_t *list, long data)
+{
+    linked_list_t *new_element = malloc(sizeof(linked_list_t));
+
+    new_element->data = &data;
+    new_element->next = list;
+    return new_element;
+}
+
 linked_list_t *push_front_list_all(linked_list_t *list, int nb, ...)
 {
     va_list args;

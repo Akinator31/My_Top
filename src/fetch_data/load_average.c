@@ -17,6 +17,10 @@ char *fetch_load_average(void)
     int fd = open("/proc/loadavg", O_RDONLY);
     char *time_file = malloc(sizeof(char) * 1000);
 
+    if (fd == -1) {
+        free(time_file);
+        return NULL;
+    }
     read(fd, time_file, 19);
     return time_file;
 }
@@ -26,6 +30,10 @@ void print_load_average(void)
     int i = 0;
     char *load_avg = fetch_load_average();
 
+    if (load_avg == NULL) {
+        printw("load average: ");
+        return;
+    }
     printw("load average: ");
     for (i = 0; i <= 3; i++)
         printw("%c", load_avg[i]);

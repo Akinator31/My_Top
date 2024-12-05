@@ -8,6 +8,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <ncurses.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "fetch_data.h"
 #include "utils.h"
 #include "my.h"
@@ -45,8 +47,8 @@ void print_percentage_user_mode(char *buffer, char *buffer2)
 
     printw("%.1f%% us,  %.1f%% sy,  %.1f%% ni,  %.1f%% id,  %.1f%% wa,",
         result[0], result[2], result[1], result[3], result[4]);
-    printw("  %.1f%% hi,  %.1f%% si,  %.1f%% st\n", result[5],
-        result[6], result[7]);
+    printw("  %.1f%% hi,  %.1f%% si,  %.1f%% st\n", 0.0,
+        result[6], 0.0);
     free_double_array(frame1);
     free_double_array(frame2);
     free(result);
@@ -54,14 +56,17 @@ void print_percentage_user_mode(char *buffer, char *buffer2)
 
 int fetch_kernel_system_stat_user_mode(void)
 {
-    char *buffer = open_and_read_file("/proc/stat", 51);
+    FILE *stat_file = fopen("/proc/stat", "r");
+    size_t len = 0;
+    char *buffer = NULL;
     char *buffer2 = NULL;
     char *time = fetch_rtc_time();
     char *time2;
 
+    getline(&buffer, &len, stat_file);
     sleep(1);
     time2 = fetch_rtc_time();
-    buffer2 = open_and_read_file("/proc/stat", 51);
+    getline(&buffer2, &len, stat_file);
     print_percentage_user_mode(buffer, buffer2);
     free(buffer);
     free(buffer2);
