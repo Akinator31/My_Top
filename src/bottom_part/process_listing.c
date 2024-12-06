@@ -9,7 +9,6 @@
 #include "fetch_data.h"
 #include "utils.h"
 #include "my.h"
-#include "my_top.h"
 
 void print_process_info(WINDOW *process_list)
 {

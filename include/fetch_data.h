@@ -10,6 +10,7 @@
     #include <sys/types.h>
     #include <ncurses.h>
     #include "my_list.h"
+    #define PROC(x) ((processus_t *)(temp->data))->x
 
 typedef struct processus_s processus_t;
 
