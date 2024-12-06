@@ -5,24 +5,51 @@
 ** load_average
 */
 
+#define _GNU_SOURCE
 #include <sys/types.h>
 #include <dirent.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <ncurses.h>
+#include <string.h>
+#include "my.h"
+
+void get_number_average(char **result, char **str_token,
+    char **separator)
+{
+    int counter = 0;
+
+    while (counter < 3) {
+        strcat(*result, *str_token);
+        strcat(*result, " ");
+        *str_token = strtok(NULL, *separator);
+        counter += 1;
+    }
+}
 
 char *fetch_load_average(void)
 {
-    int fd = open("/proc/loadavg", O_RDONLY);
-    char *time_file = malloc(sizeof(char) * 1000);
+    FILE *loadavg_file = fopen("/proc/loadavg", "r");
+    size_t len = 0;
+    int counter = 0;
+    char *time_file = NULL;
+    char *separator = " ";
+    char *str_token = NULL;
+    char *result;
 
-    if (fd == -1) {
-        free(time_file);
+    if (loadavg_file == NULL) {
+        fclose(loadavg_file);
         return NULL;
     }
-    read(fd, time_file, 19);
-    return time_file;
+    getline(&time_file, &len, loadavg_file);
+    result = malloc(sizeof(char) * my_strlen(time_file));
+    my_memset(result, '\0', sizeof(char) * my_strlen(time_file));
+    str_token = strtok(time_file, separator);
+    get_number_average(&result, &str_token, &separator);
+    free(time_file);
+    fclose(loadavg_file);
+    return result;
 }
 
 void print_load_average(void)
@@ -31,10 +58,10 @@ void print_load_average(void)
     char *load_avg = fetch_load_average();
 
     if (load_avg == NULL) {
-        printw("load average: ");
+        printw(" load average: ");
         return;
     }
-    printw("load average: ");
+    printw(" load average: ");
     for (i = 0; i <= 3; i++)
         printw("%c", load_avg[i]);
     printw(", ");

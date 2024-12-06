@@ -45,9 +45,9 @@ void print_percentage_user_mode(char *buffer, char *buffer2)
     float *result = compute_percentage(frame1,
         frame2, ticks_sum, ticks_sum2);
 
-    printw("%.1f%% us,  %.1f%% sy,  %.1f%% ni,  %.1f%% id,  %.1f%% wa,",
+    printw("%.1f us,  %.1f sy,  %.1f ni,  %.1f id,  %.1f wa,",
         result[0], result[2], result[1], result[3], result[4]);
-    printw("  %.1f%% hi,  %.1f%% si,  %.1f%% st\n", 0.0,
+    printw("  %.1f hi,  %.1f si,  %.1f st\n", 0.0,
         result[6], 0.0);
     free_double_array(frame1);
     free_double_array(frame2);
@@ -66,11 +66,14 @@ int fetch_kernel_system_stat_user_mode(void)
     getline(&buffer, &len, stat_file);
     sleep(1);
     time2 = fetch_rtc_time();
+    fclose(stat_file);
+    stat_file = fopen("/proc/stat", "r");
     getline(&buffer2, &len, stat_file);
     print_percentage_user_mode(buffer, buffer2);
     free(buffer);
     free(buffer2);
     free(time);
     free(time2);
+    fclose(stat_file);
     return 0;
 }

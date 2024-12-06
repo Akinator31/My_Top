@@ -17,6 +17,7 @@ void print_process_info(WINDOW *process_list)
     linked_list_t *temp;
 
     process_info = fetch_global_process_info();
+    my_rev_list(&process_info);
     temp = process_info;
     while ((temp != NULL) && (raw_counter < (LINES - 7))) {
         wprintw(process_list, "%d %s\n", ((processus_t *)(temp->data))->pid,

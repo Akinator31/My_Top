@@ -26,15 +26,15 @@ void analyse_uptime(char *time_file)
     }
     if ((days == 0) && ((hours > 0) && (hours < 24))) {
         if (minutes < 10)
-            printw("%d:0%d", hours, minutes);
+            printw(" %d:0%d", hours, minutes);
         else
-            printw("%d:%d", hours, minutes);
+            printw(" %d:%d", hours, minutes);
         return;
     }
     if ((days > 0) && (hours == 0))
-        printw("%d days, %d min", days, minutes);
+        printw("%d days,  %d min", days, minutes);
     else
-        printw("%d days, %d:%d", days, hours, minutes);
+        printw("%d days,  %d:%d", days, hours, minutes);
 }
 
 void fetch_uptime(void)

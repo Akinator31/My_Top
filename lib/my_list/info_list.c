@@ -51,3 +51,19 @@ int is_in_list(linked_list_t *list, char *element)
     }
     return 0;
 }
+
+void my_rev_list(linked_list_t **begin)
+{
+    linked_list_t *prev = NULL;
+    linked_list_t *curr = *begin;
+    linked_list_t *next = NULL;
+
+    while (curr->next != NULL) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    *begin = next;
+    curr->next = prev;
+}

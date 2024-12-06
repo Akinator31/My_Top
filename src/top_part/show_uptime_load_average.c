@@ -17,9 +17,9 @@ int show_uptime_load_average(WINDOW *window)
     printw("top - %s up ", time + 11);
     fetch_uptime();
     if (nb_active_users > 1)
-        printw(", %d users, ", nb_active_users);
+        printw(",  %d users, ", nb_active_users);
     else
-        printw(", %d user, ", nb_active_users);
+        printw(",  %d user, ", nb_active_users);
     print_load_average();
     free(time);
 }

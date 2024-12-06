@@ -29,5 +29,6 @@ void clear_list(linked_list_t *list);
 int is_in_list(linked_list_t *list, char *element);
 linked_list_t *push_front_list_long(linked_list_t *list, long data);
 void clear_process_list(linked_list_t *list);
+void my_rev_list(linked_list_t **begin);
 
 #endif

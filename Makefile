@@ -11,7 +11,7 @@ OBJ = 	$(SRC:%.c=build/%.o)
 OBJS = $(SRC:%.c=build-debug/%.o)
 OBJS_TESTS = $(SRC_TESTS:%.c=build-tests/%.o)
 OBJS_TESTS := $(filter-out main.c, $(OBJS_TESTS))
-DEBUG_FLAGS = -fsanitize=address -g3 -Iinclude -lncurses 
+DEBUG_FLAGS = -fsanitize=address -g3 -Iinclude -lncurses
 TESTS_FLAGS = -Iinclude -lncurses -lcriterion
 CFLAGS += -Iinclude -lncurses
 NAME = my_top
