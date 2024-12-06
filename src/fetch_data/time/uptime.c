@@ -18,7 +18,7 @@ void analyse_uptime(char *time_file)
     int timestamp = my_getnbr(time_file);
     int days = timestamp / 60 / 60 / 24;
     int hours = timestamp / 60 / 60 - (days * 24);
-    int minutes = (timestamp / 60) - (hours * 60);
+    int minutes = (timestamp - (days * 86400) - (hours * 3600)) / 60;
 
     if ((days == 0) && (hours == 0)) {
         printw("%d min", minutes);
