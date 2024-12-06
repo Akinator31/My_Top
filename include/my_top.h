@@ -7,6 +7,7 @@
 
 #ifndef INCLUDED_MY_TOP_H
     #define INCLUDED_MY_TOP_H
+    #define PROC(x) ((processus_t *)(temp->data))->x
 
 extern const char *LOADAVG_PATH;
 

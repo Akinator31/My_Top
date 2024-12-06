@@ -9,6 +9,7 @@
 #include "fetch_data.h"
 #include "utils.h"
 #include "my.h"
+#include "my_top.h"
 
 void print_process_info(WINDOW *process_list)
 {
@@ -17,11 +18,11 @@ void print_process_info(WINDOW *process_list)
     linked_list_t *temp;
 
     process_info = fetch_global_process_info();
-    my_rev_list(&process_info);
     temp = process_info;
     while ((temp != NULL) && (raw_counter < (LINES - 7))) {
-        wprintw(process_list, "%d %s\n", ((processus_t *)(temp->data))->pid,
-            ((processus_t *)(temp->data))->user);
+        wprintw(process_list, "%7d %-9s %-4d %-4d%5d  %5d   %4d %c\n"
+            , PROC(pid), PROC(user), PROC(pr), PROC(ni), PROC(virt),
+            PROC(res), PROC(shr), PROC(status));
         temp = temp->next;
         raw_counter++;
     }
@@ -30,7 +31,7 @@ void print_process_info(WINDOW *process_list)
 
 void print_title_bar(WINDOW *window, WINDOW *process_list)
 {
-    char *title = "PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND";
+    char *title = "    PID USER      PR  NI    VIRT    RES    SHR S";
 
     attron(A_STANDOUT);
     printw("%-*s", COLS, title);

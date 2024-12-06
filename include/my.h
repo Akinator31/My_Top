@@ -20,7 +20,7 @@ void *my_memcpy(void *dest, const void *src, size_t size);
 void *my_memset(void *pointer, int value, size_t size);
 int my_compute_power_rec(int nb, int p);
 char *my_strlowcase(char *str);
-char **my_passwd_file_to_word_array(char const *str);
+char **my_str_to_separator_word_array(char const *str, char separator);
 char *my_strncat(char *dest, char const *src, int nb);
 void copy_until(char *src, char *dest, char to_find);
 

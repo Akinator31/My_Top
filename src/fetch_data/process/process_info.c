@@ -17,17 +17,41 @@
 #include "my_list.h"
 #include "my.h"
 
-int retrieve_specific_field(char *buffer, char *element_to_find)
+static int get_field(char *buffer, char *element_to_find)
 {
     int i = 0;
 
     for (i = 0; buffer[i] != '\0'; i++) {
         if ((buffer[i] == element_to_find[0])
         && (buffer[i + 1] == element_to_find[1])
-        && (buffer[i + 2] == element_to_find[2]))
+        && (buffer[i + 2] == element_to_find[2])
+        && (buffer[i + 3] == element_to_find[3]))
             break;
     }
     return i;
+}
+
+int fetch_process_stat(char *pid, int index_element)
+{
+    char *filepath = get_filepath("/proc/", pid, "/stat", 256);
+    FILE *stat_file = fopen(filepath, "r");
+    char *stat_element = NULL;
+    char *buffer = NULL;
+    int result = 0;
+    int counter = 0;
+    size_t len = 0;
+
+    getline(&buffer, &len, stat_file);
+    stat_element = strtok(buffer, " ");
+    while (counter < index_element) {
+        stat_element = strtok(NULL, " ");
+        counter += 1;
+    }
+    free(filepath);
+    fclose(stat_file);
+    result = my_getnbr(stat_element);
+    free(buffer);
+    return result;
 }
 
 int fetch_user_process_owner_uid(char *pid)
@@ -69,15 +93,21 @@ linked_list_t *fetch_process_info(linked_list_t *data_list, char *pid)
     char *user_name = fetch_user_process_owner(pid);
     char *filepath = get_filepath("/proc/", pid, "/status", 256);
     char *buffer = open_and_read_file(filepath, 500);
-    int pid_nb = 0;
+    char *tkt = NULL;
+    int process_stat_array[6] = {0};
     processus_t *process_stat = NULL;
 
     if (buffer == NULL) {
         my_free(3, buffer, user_name, filepath);
         return data_list;
     }
-    pid_nb = my_getnbr(buffer + retrieve_specific_field(buffer, "Pid"));
-    process_stat = create_process(pid_nb, user_name);
+    process_stat_array[0] = my_getnbr(buffer + get_field(buffer, "Pid:"));
+    process_stat_array[1] = fetch_process_stat(pid, 17);
+    process_stat_array[2] = fetch_process_stat(pid, 18);
+    process_stat_array[3] = fetch_process_stat(pid, 22) / 1024;
+    process_stat_array[4] = my_getnbr(buffer + get_field(buffer, "VmRS"));
+    process_stat_array[5] = my_getnbr(buffer + get_field(buffer, "RssF"));
+    process_stat = create_process(user_name, process_stat_array, pid);
     my_free(3, buffer, user_name, filepath);
     return push_front_list(data_list, process_stat);
 }
@@ -96,5 +126,6 @@ linked_list_t *fetch_global_process_info(void)
         dir_info = readdir(current);
     }
     closedir(current);
+    my_rev_list(&process_data);
     return process_data;
 }
